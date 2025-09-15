@@ -3,8 +3,6 @@ from unidecode import unidecode
 
 nome_jogo = 'Palavras'
 arquivo_palavras = 'palavras.txt'
-max_turnos = 5
-turno_atual = 0
 
 def retorna_lista_palavras():
     # Inserindo as palavras do arquivo 'palavras.txt' na lista 'palavras'
@@ -23,6 +21,8 @@ def retorna_lista_palavras():
     return palavra_aleatoria, palavra_aleatoria_filtro
 
 def jogo(palavra_aleatoria, palavra_aleatoria_filtro):
+    max_turnos = 5
+    turno_atual = 0
     letras_posicao_errada = []
     letras_erradas = []
 
@@ -33,7 +33,7 @@ def jogo(palavra_aleatoria, palavra_aleatoria_filtro):
     while max_turnos > turno_atual:
         chute = unidecode(input('Qual é a palavra? ').lower())
         
-        if len(chute) > len(palavra_aleatoria):
+        if len(chute) != len(palavra_aleatoria):
             print('Digite uma palavra de 5 letras')
             continue
         elif not chute.isalpha():
@@ -90,12 +90,10 @@ def main():
             print('1 - Iniciar o jogo')
             print('2 - Terminar aplicação')
             selecao = int(input('Selecione uma das opções: '))
-
             
             if selecao == 1:
                 palavra_aleatoria, palavra_aleatoria_filtro = retorna_lista_palavras()
                 jogo(palavra_aleatoria, palavra_aleatoria_filtro)
-                main()
             elif selecao == 2:    
                 print('Aplicação finalizada')
                 break
